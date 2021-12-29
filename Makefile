@@ -25,7 +25,7 @@ cs-fix:
 
 test:
 	@$(MAKE) composer
-	docker-compose -f .docker/docker-compose.yml exec php ./vendor/bin/phpunit
+	docker-compose -f .docker/docker-compose.yml exec php ./vendor/bin/phpunit --testdox --verbose --stop-on-failure
 
 test-full:
 	@$(MAKE) cs-check
