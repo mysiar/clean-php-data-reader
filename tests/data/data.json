@@ -1,0 +1,22 @@
+[
+  {
+    "first_name": "Kestutis",
+    "age": 29,
+    "gender": "male"
+  },
+  {
+    "first_name": "Vytautas",
+    "age": 32,
+    "gender": "male"
+  },
+  {
+    "first_name": "Karina",
+    "age": 25,
+    "gender": "female"
+  },
+  {
+    "first_name": "Lee",
+    "age": 43,
+    "gender": "male"
+  }
+]
