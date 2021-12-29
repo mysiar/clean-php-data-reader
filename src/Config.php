@@ -39,6 +39,9 @@ class Config
     }
 
     /**
+     * Checks if format is enabled in config - returns bool
+     * if format is not listed in the config throws exception
+     *
      * @throws
      */
     public function isFormatEnabled(string $format): bool
