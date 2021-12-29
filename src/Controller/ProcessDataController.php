@@ -7,8 +7,6 @@ namespace App\Controller;
 use App\Config;
 use App\Exception\ConfigException;
 use App\Exception\FileUploaderException;
-use App\Exception\FormatDisabled;
-use App\Exception\FormatNotSupportedException;
 use App\Factory\ReaderFactory;
 use App\FileUploader;
 use Throwable;
@@ -37,29 +35,6 @@ class ProcessDataController extends AbstractController
             $reader = $factory->create($this->uploader->upload($globalVarFiles));
             $data = $reader->read();
         } catch (Throwable|ConfigException|FileUploaderException $e) {
-            $this->renderErrorPage($e->getMessage());
-            return;
-        }
-
-        $this->render('data.php', [
-            'data' => $data,
-        ]);
-    }
-
-    public function process2(array $globalVarFiles): void
-    {
-        $factory = new ReaderFactory($this->config);
-
-        try {
-            $reader = $factory->create($this->uploader->upload($globalVarFiles));
-        } catch (FormatDisabled|FormatNotSupportedException $e) {
-            $this->renderErrorPage($e->getMessage());
-            return;
-        }
-
-        try {
-            $data = $reader->read();
-        } catch (Throwable $e) {
             $this->renderErrorPage($e->getMessage());
             return;
         }
