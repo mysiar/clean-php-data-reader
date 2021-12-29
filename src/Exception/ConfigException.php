@@ -27,4 +27,9 @@ class ConfigException extends Exception
     {
         return new self(sprintf("Unsupported format type: %s.", $format));
     }
+
+    public static function formatDisabled(string $format): self
+    {
+        return new self(sprintf('Format "%s" disabled in config.', $format));
+    }
 }
