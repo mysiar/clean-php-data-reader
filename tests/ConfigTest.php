@@ -48,11 +48,6 @@ class ConfigTest extends TestCase
 
         $this->expectException(ConfigException::class);
 
-        /*
-            below line is commented out due to failure on GitHub action
-            locally works
-         */
-//        $this->expectExceptionMessage("Config file doesn't exist: /var/www/tests/data/not-existing.yaml.");
         new Config($filename);
     }
 
@@ -65,7 +60,6 @@ class ConfigTest extends TestCase
         $filename = __DIR__ . '/data/config-wrong.yaml';
 
         $this->expectException(ConfigException::class);
-        $this->expectExceptionMessage("Config section doesn't exist: formats");
         new Config($filename);
     }
 
@@ -78,7 +72,6 @@ class ConfigTest extends TestCase
         $filename = __DIR__ . '/data/config-wrong-yaml.yaml';
 
         $this->expectException(ConfigException::class);
-        $this->expectExceptionMessage("Config file wrong YAML : /var/www/tests/data/config-wrong-yaml.yaml.");
         new Config($filename);
     }
 }
