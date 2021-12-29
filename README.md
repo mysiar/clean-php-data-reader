@@ -1,4 +1,4 @@
-ck  # Clean PHP Data Reader
+# Clean PHP Data Reader
 
 Clean PHP (no framework, except testing) MVC Application :blush:
 
