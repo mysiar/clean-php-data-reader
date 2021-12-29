@@ -1,0 +1,4 @@
+formats:
+  xml: true
+  json: true
+  csv: true
