@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests;
 
 use App\Config;
+use App\Enum\DataFormat;
 use App\Exception\ConfigException;
 use PHPUnit\Framework\TestCase;
 
@@ -19,23 +20,9 @@ class ConfigTest extends TestCase
         $filename = __DIR__ . '/data/config.yaml';
         $config = new Config($filename);
 
-        $this->assertTrue($config->isFormatEnabled('json'));
-        $this->assertTrue($config->isFormatEnabled('xml'));
-        $this->assertFalse($config->isFormatEnabled('csv'));
-    }
-
-    /**
-     * @covers \App\Config::isFormatEnabled
-     * @throws ConfigException
-     */
-    public function testIsFormatEnabledThrows(): void
-    {
-        $filename = __DIR__ . '/data/config.yaml';
-        $config = new Config($filename);
-
-        $this->expectException(ConfigException::class);
-        $this->expectExceptionMessage('Unsupported format type: txt.');
-        $config->isFormatEnabled('txt');
+        $this->assertTrue($config->isFormatEnabled(DataFormat::JSON));
+        $this->assertTrue($config->isFormatEnabled(DataFormat::XML));
+        $this->assertFalse($config->isFormatEnabled(DataFormat::CSV));
     }
 
     /**

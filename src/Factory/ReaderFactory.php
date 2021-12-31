@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Factory;
 
 use App\Config;
+use App\Enum\DataFormat;
 use App\Exception\ConfigException;
 use App\Reader\CsvReader;
 use App\Reader\JsonReader;
@@ -27,16 +28,17 @@ class ReaderFactory
     public function create(string $filename): ReaderInterface
     {
         $file = new SplFileObject($filename);
-        $ext = strtolower($file->getExtension());
 
-        if (! $this->config->isFormatEnabled($ext)) {
-            throw ConfigException::formatDisabled($ext);
+        $format = DataFormat::getDataFormat($file->getExtension());
+
+        if (! $this->config->isFormatEnabled($format)) {
+            throw ConfigException::formatDisabled($format);
         }
 
-        return match ($ext) {
-            ReaderInterface::TYPE_JSON => new JsonReader($file),
-                ReaderInterface::TYPE_XML => new XmlReader($file),
-                ReaderInterface::TYPE_CSV => new CsvReader($file),
+        return match ($format) {
+            DataFormat::JSON => new JsonReader($file),
+            DataFormat::XML => new XmlReader($file),
+            DataFormat::CSV => new CsvReader($file),
         };
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Enum\DataFormat;
 use App\Exception\ConfigException;
 use RuntimeException;
 use SplFileObject;
@@ -40,18 +41,9 @@ class Config
 
     /**
      * Checks if format is enabled in config - returns bool
-     * if format is not listed in the config throws exception
-     *
-     * @throws
      */
-    public function isFormatEnabled(string $format): bool
+    public function isFormatEnabled(DataFormat $format): bool
     {
-        $format = strtolower($format);
-
-        if (! array_key_exists($format, $this->formats)) {
-            throw ConfigException::formatNotSupported($format);
-        }
-
-        return (bool) $this->formats[$format];
+        return (bool) $this->formats[DataFormat::getString($format)];
     }
 }
