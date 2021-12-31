@@ -44,6 +44,6 @@ class Config
      */
     public function isFormatEnabled(DataFormat $format): bool
     {
-        return (bool) $this->formats[DataFormat::getString($format)];
+        return (bool) $this->formats[DataFormat::string($format)];
     }
 }
