@@ -26,6 +26,6 @@ class ConfigException extends Exception
 
     public static function formatDisabled(DataFormat $format): self
     {
-        return new self(sprintf('Format "%s" disabled in config.', DataFormat::getString($format)));
+        return new self(sprintf('Format "%s" disabled in config.', DataFormat::string($format)));
     }
 }

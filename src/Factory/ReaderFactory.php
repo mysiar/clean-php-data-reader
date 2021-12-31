@@ -7,11 +7,13 @@ namespace App\Factory;
 use App\Config;
 use App\Enum\DataFormat;
 use App\Exception\ConfigException;
+use App\Exception\DataFormatException;
 use App\Reader\CsvReader;
 use App\Reader\JsonReader;
 use App\Reader\ReaderInterface;
 use App\Reader\XmlReader;
 use SplFileObject;
+use ValueError;
 
 class ReaderFactory
 {
@@ -28,8 +30,13 @@ class ReaderFactory
     public function create(string $filename): ReaderInterface
     {
         $file = new SplFileObject($filename);
+        $ext = strtolower($file->getExtension());
 
-        $format = DataFormat::getDataFormat($file->getExtension());
+        try {
+            $format = DataFormat::from($ext);
+        } catch (ValueError $e) {
+            throw DataFormatException::formatNotSupported($ext);
+        }
 
         if (! $this->config->isFormatEnabled($format)) {
             throw ConfigException::formatDisabled($format);
