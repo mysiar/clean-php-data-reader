@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Exception;
 
+use App\Enum\DataFormat;
 use Exception;
 
 class ConfigException extends Exception
@@ -23,13 +24,8 @@ class ConfigException extends Exception
         return new self(sprintf("Config file wrong YAML : %s.", $filename));
     }
 
-    public static function formatNotSupported(string $format): self
+    public static function formatDisabled(DataFormat $format): self
     {
-        return new self(sprintf("Unsupported format type: %s.", $format));
-    }
-
-    public static function formatDisabled(string $format): self
-    {
-        return new self(sprintf('Format "%s" disabled in config.', $format));
+        return new self(sprintf('Format "%s" disabled in config.', DataFormat::getString($format)));
     }
 }

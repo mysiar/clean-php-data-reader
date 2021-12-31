@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Tests\Enum;
@@ -14,7 +15,7 @@ class DataFormatTest extends TestCase
      *
      * @throws
      */
-    public function testGetYearQuarter(): void
+    public function testGetDataFormat(): void
     {
         $this->assertEquals(DataFormat::JSON, DataFormat::getDataFormat('json'));
         $this->assertEquals(DataFormat::JSON, DataFormat::getDataFormat('JsoN'));
@@ -24,5 +25,15 @@ class DataFormatTest extends TestCase
         $this->expectException(DataFormatException::class);
         $this->expectExceptionMessage('Unsupported format type: txt !');
         DataFormat::getDataFormat('txt');
+    }
+
+    /**
+     * @covers \App\Enum\DataFormat::getString
+     */
+    public function testGetString(): void
+    {
+        $this->assertEquals('json', DataFormat::getString(DataFormat::JSON));
+        $this->assertEquals('xml', DataFormat::getString(DataFormat::XML));
+        $this->assertEquals('csv', DataFormat::getString(DataFormat::CSV));
     }
 }

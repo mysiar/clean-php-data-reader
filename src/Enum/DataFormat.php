@@ -22,4 +22,13 @@ enum DataFormat: string
             default => throw DataFormatException::formatNotSupported($format),
         };
     }
+
+    public static function getString(DataFormat $format): string
+    {
+        return match ($format) {
+            self::JSON => 'json',
+            self::XML => 'xml',
+            self::CSV => 'csv',
+        };
+    }
 }

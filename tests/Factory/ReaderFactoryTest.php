@@ -6,6 +6,7 @@ namespace App\Tests\Factory;
 
 use App\Config;
 use App\Exception\ConfigException;
+use App\Exception\DataFormatException;
 use App\Factory\ReaderFactory;
 use App\Reader\CsvReader;
 use App\Reader\JsonReader;
@@ -51,8 +52,8 @@ class ReaderFactoryTest extends TestCase
 
         $filename = __DIR__ . '/../data/data.txt';
 
-        $this->expectException(ConfigException::class);
-        $this->expectExceptionMessage('Unsupported format type: txt.');
+        $this->expectException(DataFormatException::class);
+        $this->expectExceptionMessage('Unsupported format type: txt !');
         $this->factory->create($filename);
     }
 
